@@ -21,14 +21,13 @@ public class ExpressionTest {
 
     @ParameterizedTest
     @ArgumentsSource(InvalidParameters.class)
-    public void testCalculateShouldThrowIllegalArgumentException(String[] parameters) {
-        Expression expression = new Expression(parameters);
-        assertThrows(IllegalArgumentException.class, expression::calculate);
+    public void testConstructorShouldThrowIllegalArgumentExceptionWhenParametersInvalid(String[] parameters) {
+        assertThrows(IllegalArgumentException.class, () -> new Expression(parameters));
     }
 
     @ParameterizedTest
     @ArgumentsSource(ParametersWithIncorrectLength.class)
-    public void testConstructorShouldThrowIllegalArgumentException(String[] parameters) {
+    public void testConstructorShouldThrowIllegalArgumentExceptionWhenLengthNotEqualFour(String[] parameters) {
         assertThrows(IllegalArgumentException.class, () -> new Expression(parameters));
     }
 

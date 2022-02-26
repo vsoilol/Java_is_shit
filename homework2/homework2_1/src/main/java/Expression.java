@@ -5,6 +5,14 @@ public class Expression {
     private double m2;
 
     public Expression(String[] parameters) throws NumberFormatException, IllegalArgumentException {
+        validateParameters(parameters);
+    }
+
+    public double calculate() throws IllegalArgumentException {
+        return 4 * Math.pow(Math.PI, 2) * Math.pow(a, 3) / (Math.pow(p, 2) * (m1 + m2));
+    }
+
+    private void validateParameters(String[] parameters) throws NumberFormatException, IllegalArgumentException {
         if (parameters.length != 4) {
             throw new IllegalArgumentException(ExceptionMessages.PARAMETERS_LENGTH_INCORRECT);
         }
@@ -12,14 +20,10 @@ public class Expression {
         if (!tryParseParameters(parameters)) {
             throw new NumberFormatException(ExceptionMessages.CANNOT_PARSE_PARAMETERS);
         }
-    }
 
-    public double calculate() throws IllegalArgumentException {
         if (!areParametersValid()) {
             throw new IllegalArgumentException(ExceptionMessages.INVALID_PARAMETERS);
         }
-
-        return 4 * Math.pow(Math.PI, 2) * Math.pow(a, 3) / (Math.pow(p, 2) * (m1 + m2));
     }
 
     private boolean areParametersValid() {
