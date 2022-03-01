@@ -1,11 +1,9 @@
 import Providers.IncorrectParameters;
 import Providers.InvalidParameters;
 import Providers.ParametersWithIncorrectLength;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-import org.junit.rules.ExpectedException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
