@@ -1,4 +1,5 @@
 import Factorial.FactorialWithDoWhile;
+import Factorial.FactorialWithFor;
 import Factorial.FactorialWithWhile;
 import Providers.FactorialProvider;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,7 +18,7 @@ public class FactorialTest {
     @ParameterizedTest
     @ArgumentsSource(FactorialProvider.class)
     public void testCalculateFactorialWithForShouldWorkAsExpected(int number, Long expected) {
-        Long actual = (new FactorialWithWhile()).calculateFactorial(number);
+        Long actual = (new FactorialWithFor()).calculateFactorial(number);
         assertEquals(expected, actual);
     }
 
