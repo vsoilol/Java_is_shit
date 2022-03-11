@@ -1,8 +1,8 @@
 package ATMActions;
 
 import Card.Card;
-import ConsoleMenu.MenuItem;
-import ConsoleMenu.UIResources;
+import Resources.UIResources;
+import Validators.ExchangeRateValidator;
 
 import java.math.BigDecimal;
 
@@ -11,13 +11,9 @@ public class AddMoney extends CardMenuItem {
         super(card, "Add money", "Adding money");
     }
 
-    private boolean isValidMoney(BigDecimal money){
-        return money.compareTo(BigDecimal.valueOf(0)) == 1;
-    }
-
     @Override
     public void executeCustomAction() {
-        BigDecimal money = this.consoleProvider.prompt(UIResources.ENTER_MONEY_TO_ADD, BigDecimal.class, this::isValidMoney);
+        BigDecimal money = this.consoleProvider.prompt(UIResources.ENTER_MONEY_TO_ADD, BigDecimal.class, new ExchangeRateValidator());
         card.addMoneyToBalance(money);
         this.consoleProvider.println(UIResources.SUCCESS);
     }

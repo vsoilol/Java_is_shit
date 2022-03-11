@@ -1,5 +1,6 @@
 package ConsoleMenu;
 
+import Resources.UIResources;
 import Validators.Validator;
 
 import java.math.BigDecimal;

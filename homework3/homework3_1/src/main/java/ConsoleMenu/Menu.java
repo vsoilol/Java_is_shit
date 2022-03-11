@@ -1,5 +1,6 @@
 package ConsoleMenu;
 
+import Resources.UIResources;
 import Validators.Validator;
 
 import java.util.ArrayList;
@@ -62,8 +63,7 @@ public class Menu {
 
         if (selection != this.menuItems.size() + 1) {
             this.menuItems.get(selection - 1).display();
-        }
-        else{
+        } else {
             this.goBack();
         }
     }

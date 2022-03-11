@@ -28,7 +28,7 @@ public abstract class MenuItem {
         return title;
     }
 
-    public void setParentMenu(Menu menu){
+    public void setParentMenu(Menu menu) {
         this.parentMenu = menu;
     }
 }
