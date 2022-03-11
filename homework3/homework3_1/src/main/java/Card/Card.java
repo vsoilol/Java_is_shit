@@ -22,6 +22,10 @@ public class Card {
         return balance;
     }
 
+    public String getHolderName() {
+        return holderName;
+    }
+
     public void addMoneyToBalance(BigDecimal money) {
         balance = balance.add(money);
     }
@@ -35,9 +39,5 @@ public class Card {
 
     public BigDecimal convertMoneyByExchangeRate(double exchangeRate) throws NumberFormatException {
         return balance.multiply(BigDecimal.valueOf(exchangeRate));
-    }
-
-    public String getHolderName() {
-        return holderName;
     }
 }
