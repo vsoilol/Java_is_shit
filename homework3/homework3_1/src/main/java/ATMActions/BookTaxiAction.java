@@ -1,10 +1,10 @@
-package CardViewActions;
+package ATMActions;
 
-import ConsoleView.*;
+import ConsoleMenu.*;
 
 public class BookTaxiAction extends MenuItem {
     public BookTaxiAction(){
-        super("Booking a Taxi", "Book a taxi");
+        super("Book a taxi", "Booking a Taxi");
     }
 
     @Override

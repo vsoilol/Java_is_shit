@@ -1,4 +1,4 @@
-package ConsoleView;
+package Validators;
 
 public interface Validator<T> {
 

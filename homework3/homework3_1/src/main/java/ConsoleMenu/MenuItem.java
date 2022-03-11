@@ -1,4 +1,4 @@
-package ConsoleView;
+package ConsoleMenu;
 
 public abstract class MenuItem {
     private final String runningTitle;
@@ -7,21 +7,12 @@ public abstract class MenuItem {
 
     protected final ConsoleProvider consoleProvider;
 
-    private Menu nextMenu;
-
     protected Menu parentMenu;
 
-    public MenuItem(String runningTitle, String nameInParentMenu) {
+    public MenuItem(String title, String runningTitle) {
         this.runningTitle = runningTitle;
-        this.title = nameInParentMenu;
-        this.consoleProvider = new ConsoleProvider();
-    }
-
-    public MenuItem(String runningTitle, String nameInParentMenu, Menu nextMenu) {
-        this.runningTitle = runningTitle;
-        this.title = nameInParentMenu;
-        this.consoleProvider = new ConsoleProvider();
-        this.nextMenu = nextMenu;
+        this.title = title;
+        this.consoleProvider = ConsoleProvider.DEFAULT;
     }
 
     public abstract void executeCustomAction();
@@ -30,6 +21,7 @@ public abstract class MenuItem {
         consoleProvider.println();
         consoleProvider.println(this.runningTitle);
         executeCustomAction();
+        this.parentMenu.display();
     }
 
     public String getTitle() {
@@ -38,9 +30,5 @@ public abstract class MenuItem {
 
     public void setParentMenu(Menu menu){
         this.parentMenu = menu;
-    }
-
-    public Menu getParentMenu(){
-        return parentMenu;
     }
 }

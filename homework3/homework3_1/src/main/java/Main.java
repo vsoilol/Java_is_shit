@@ -1,14 +1,17 @@
-import CardViewActions.BookTaxiAction;
-import ConsoleView.Menu;
-import ConsoleView.MenuView;
+import ATMActions.AddMoney;
+import ATMActions.BookTaxiAction;
+import ATMActions.DisplayBalance;
+import Card.Card;
+import ConsoleMenu.Menu;
 
 public class Main {
     public static void main(String[] args) {
-        Menu historyMenu = new Menu("Booking History");
+        Card card = new Card("Vlad");
 
-        // register menu items
-        historyMenu.addMenuItem(new BookTaxiAction());
-
-        historyMenu.display();
+        Menu atm = new Menu("ATM");
+        atm.addMenuItem(new BookTaxiAction());
+        atm.addMenuItem(new DisplayBalance(card));
+        atm.addMenuItem(new AddMoney(card));
+        atm.display();
     }
 }

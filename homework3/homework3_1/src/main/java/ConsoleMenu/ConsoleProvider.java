@@ -1,4 +1,6 @@
-package ConsoleView;
+package ConsoleMenu;
+
+import Validators.Validator;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -6,24 +8,18 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleProvider {
+    public static final ConsoleProvider DEFAULT = new ConsoleProvider();
+
     private final Scanner keyboard = new Scanner(System.in);
 
     public void print(Object o) {
         System.out.print(o);
     }
 
-    /**
-     * A wrapper of {@code System.out.println(Object o)}
-     *
-     * @param o the object to print
-     */
     public void println(Object o) {
         System.out.println(o);
     }
 
-    /**
-     * A wrapper of {@code System.out.println()}
-     */
     public void println() {
         System.out.println();
     }
@@ -59,13 +55,12 @@ public class ConsoleProvider {
 
                 output = expectedClass.cast(input);
                 isValid = validator == null || validator.isValid(output);
-            } catch (InputMismatchException e) {
-                // nothing
+            } catch (InputMismatchException ignored) {
             } finally {
                 if (expectedClass != String.class) {
                     keyboard.nextLine();
                 }
-                if(!isValid){
+                if (!isValid) {
                     this.print(UIResources.INPUT_ERROR_MESSAGE);
                 }
             }
@@ -73,7 +68,7 @@ public class ConsoleProvider {
         return output;
     }
 
-    public  <T> T prompt(String message, Class<T> expectedClass) {
+    public <T> T prompt(String message, Class<T> expectedClass) {
         return this.prompt(message, expectedClass, null);
     }
 }
