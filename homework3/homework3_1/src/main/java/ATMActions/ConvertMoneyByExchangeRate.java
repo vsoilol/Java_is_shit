@@ -13,8 +13,8 @@ public class ConvertMoneyByExchangeRate extends CardMenuItem {
 
     @Override
     public void executeCustomAction() {
-        Double exchangeRate = this.consoleProvider.prompt(UIResources.ENTER_EXCHANGE_RATE, Double.class, new MoneyValidator());
+        Double exchangeRate = consoleProvider.prompt(UIResources.ENTER_EXCHANGE_RATE, Double.class, new MoneyValidator());
         BigDecimal convertedMoney = card.convertMoneyByExchangeRate(exchangeRate);
-        this.consoleProvider.println(UIResources.CONVERTED_MONEY + convertedMoney);
+        consoleProvider.println(UIResources.CONVERTED_MONEY + convertedMoney);
     }
 }

@@ -13,7 +13,7 @@ public class WithdrawMoney extends CardMenuItem {
 
     @Override
     public void executeCustomAction() {
-        BigDecimal money = this.consoleProvider.prompt(UIResources.ENTER_MONEY_TO_WITHDRAW, BigDecimal.class, new ExchangeRateValidator());
+        BigDecimal money = consoleProvider.prompt(UIResources.ENTER_MONEY_TO_WITHDRAW, BigDecimal.class, new ExchangeRateValidator());
 
         try {
             card.withdrawMoneyFrom(money);

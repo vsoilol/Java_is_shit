@@ -12,7 +12,7 @@ public abstract class MenuItem {
     public MenuItem(String title, String runningTitle) {
         this.runningTitle = runningTitle;
         this.title = title;
-        this.consoleProvider = ConsoleProvider.DEFAULT;
+        this.consoleProvider = ConsoleProvider.getInstance();
     }
 
     public abstract void executeCustomAction();
@@ -21,7 +21,7 @@ public abstract class MenuItem {
         consoleProvider.println();
         consoleProvider.println(this.runningTitle);
         executeCustomAction();
-        this.parentMenu.display();
+        parentMenu.display();
     }
 
     public String getTitle() {
@@ -29,6 +29,6 @@ public abstract class MenuItem {
     }
 
     public void setParentMenu(Menu menu) {
-        this.parentMenu = menu;
+        parentMenu = menu;
     }
 }

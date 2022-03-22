@@ -9,6 +9,6 @@ public class DisplayBalance extends CardMenuItem {
 
     @Override
     public void executeCustomAction() {
-        this.consoleProvider.println("Balance: " + card.getBalance());
+        consoleProvider.println("Balance: " + card.getBalance());
     }
 }

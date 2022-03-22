@@ -5,13 +5,32 @@ import Validators.Validator;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
+import java.util.function.Supplier;
 
 public class ConsoleProvider {
-    public static final ConsoleProvider DEFAULT = new ConsoleProvider();
+    private final Map<Class, Supplier<Object>> keyboardParseInputs;
 
     private final Scanner keyboard = new Scanner(System.in);
+
+    public ConsoleProvider(){
+        this.keyboardParseInputs = new HashMap<>() {{
+            put(Integer.class, keyboard::nextInt);
+            put(Double.class, keyboard::nextDouble);
+            put(String.class, keyboard::nextLine);
+            put(Byte.class, keyboard::nextByte);
+            put(BigDecimal.class, keyboard::nextBigDecimal);
+            put(BigInteger.class, keyboard::nextBigInteger);
+            put(Boolean.class, keyboard::nextBoolean);
+            put(Float.class, keyboard::nextFloat);
+            put(Long.class, keyboard::nextLong);
+            put(Short.class, keyboard::nextShort);
+        }};
+    }
+
+    public static ConsoleProvider getInstance(){
+        return new ConsoleProvider();
+    }
 
     public void print(Object o) {
         System.out.print(o);
@@ -32,27 +51,7 @@ public class ConsoleProvider {
         this.print(message);
         while (!isValid) {
             try {
-                if (expectedClass == Integer.class) {
-                    input = keyboard.nextInt();
-                } else if (expectedClass == Double.class) {
-                    input = keyboard.nextDouble();
-                } else if (expectedClass == String.class) {
-                    input = keyboard.nextLine();
-                } else if (expectedClass == Byte.class) {
-                    input = keyboard.nextByte();
-                } else if (expectedClass == BigDecimal.class) {
-                    input = keyboard.nextBigDecimal();
-                } else if (expectedClass == BigInteger.class) {
-                    input = keyboard.nextBigInteger();
-                } else if (expectedClass == Boolean.class) {
-                    input = keyboard.nextBoolean();
-                } else if (expectedClass == Float.class) {
-                    input = keyboard.nextFloat();
-                } else if (expectedClass == Long.class) {
-                    input = keyboard.nextLong();
-                } else if (expectedClass == Short.class) {
-                    input = keyboard.nextShort();
-                }
+                input = keyboardParseInputs.get(expectedClass).get();
 
                 output = expectedClass.cast(input);
                 isValid = validator == null || validator.isValid(output);
