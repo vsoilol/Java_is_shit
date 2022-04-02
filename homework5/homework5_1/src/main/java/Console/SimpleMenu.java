@@ -27,7 +27,7 @@ public class SimpleMenu {
         String operation = consoleProvider.prompt(UIResources.MENU_SELECTION_MESSAGE, String.class).toLowerCase();
 
         switch (operation) {
-            case MenuItems.PRINT -> filePresenter.displayFileTreeView();
+            case MenuItems.PRINT -> filePresenter.displayDirectoryTree();
             case MenuItems.QUIT -> {
                 consoleProvider.print(UIResources.QUIT_MESSAGE);
                 isMenuRun = false;

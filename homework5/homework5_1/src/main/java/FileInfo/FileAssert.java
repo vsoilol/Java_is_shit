@@ -1,9 +1,11 @@
 package FileInfo;
 
+import Resources.ErrorMessages;
+
 public class FileAssert {
     public static String printDirectoryTree(FileComponent folder) {
         if (folder instanceof File) {
-            throw new IllegalArgumentException("folder is not a Directory");
+            throw new IllegalArgumentException(ErrorMessages.FILE_COMPONENT_IS_NOT_FOLDER.formatted(folder.name));
         }
 
         int indent = 0;
@@ -16,7 +18,7 @@ public class FileAssert {
 
     private static void printDirectoryTree(FileComponent folder, int indent, StringBuilder sb) {
         if (folder instanceof File) {
-            throw new IllegalArgumentException("folder is not a Directory");
+            throw new IllegalArgumentException(ErrorMessages.FILE_COMPONENT_IS_NOT_FOLDER.formatted(folder.name));
         }
 
         sb.append(getIndentString(indent));

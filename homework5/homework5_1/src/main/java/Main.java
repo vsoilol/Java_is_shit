@@ -7,8 +7,6 @@ import FileInfo.FileAssert;
 import FileInfo.FileService;
 import FileInfo.Folder;
 
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
         Folder data = new Folder("root");
@@ -39,11 +37,11 @@ public class Main {
         FilePresenter filePresenter = new FilePresenter(fileService, fileValidation, data);
         ConsoleProvider consoleProvider = new ConsoleProvider();
 
-/*        SimpleMenu simpleMenu = new SimpleMenu(filePresenter, consoleProvider);
-        simpleMenu.runMenu();*/
+        SimpleMenu simpleMenu = new SimpleMenu(filePresenter, consoleProvider);
+        simpleMenu.runMenu();
 
         //FileAssert fileAssert = new FileAssert();
-        String fileTree =  FileAssert.printDirectoryTree(data);
-        consoleProvider.println(fileTree);
+//        String fileTree =  FileAssert.printDirectoryTree(data);
+//        consoleProvider.println(fileTree);
     }
 }

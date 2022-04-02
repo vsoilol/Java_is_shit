@@ -1,5 +1,6 @@
 package Console;
 
+import FileInfo.FileAssert;
 import FileInfo.FileService;
 import FileInfo.Folder;
 import Resources.ErrorMessages;
@@ -19,10 +20,8 @@ public class FilePresenter {
         this.consoleProvider = ConsoleProvider.getInstance();
     }
 
-    public void displayFileTreeView() {
-        StringBuilder stringBuilder = new StringBuilder();
-        fileService.createFileTreeView(stringBuilder, rootFolder, 0);
-        consoleProvider.print(stringBuilder);
+    public void displayDirectoryTree() {
+        consoleProvider.print(FileAssert.printDirectoryTree(rootFolder));
     }
 
     public void addNewChild(String path) {
