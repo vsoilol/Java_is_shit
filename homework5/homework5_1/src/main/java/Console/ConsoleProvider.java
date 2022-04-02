@@ -30,10 +30,6 @@ public class ConsoleProvider {
         }};
     }
 
-    public static ConsoleProvider getInstance() {
-        return new ConsoleProvider();
-    }
-
     public void print(Object o) {
         System.out.print(o);
     }

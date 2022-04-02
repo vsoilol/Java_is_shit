@@ -1,5 +1,9 @@
-package FileInfo;
+package FileSystem;
 
+import FileInfo.File;
+import FileInfo.FileComponent;
+import FileInfo.Folder;
+import Resources.ErrorMessages;
 import Validators.FileSystemBuilderValidator;
 
 public class FileSystemBuilder {
@@ -8,8 +12,7 @@ public class FileSystemBuilder {
     private final Folder root;
     private Folder currentDirectory;
 
-    public FileSystemBuilder(FileSystemBuilderValidator validator, String rootFolder)
-    {
+    public FileSystemBuilder(FileSystemBuilderValidator validator, String rootFolder) {
         this.validator = validator;
         this.root = new Folder(rootFolder);
         this.currentDirectory = root;
@@ -19,7 +22,7 @@ public class FileSystemBuilder {
         return root;
     }
 
-    public void addFileTreeByFilesName(String[] filesName){
+    public void addFileTreeByFilesName(String[] filesName) {
         validator.checkFilesName(filesName, root.getName());
         currentDirectory = root;
 
@@ -28,17 +31,18 @@ public class FileSystemBuilder {
 
             FileComponent childFileComponent = currentDirectory.getFileComponentByName(fileName);
 
-            if(childFileComponent == null){
+            if (childFileComponent == null) {
                 addNewFileComponent(fileName);
                 continue;
             }
 
-            if(childFileComponent instanceof Folder && i != filesName.length - 1){
-                currentDirectory = (Folder)childFileComponent;
+            if (childFileComponent instanceof Folder && i != filesName.length - 1) {
+                currentDirectory = (Folder) childFileComponent;
                 continue;
             }
 
-            throw new IllegalArgumentException("'" + childFileComponent.getName() + "' is already exist");
+            String errorMessage = ErrorMessages.ALREADY_EXIST.formatted(childFileComponent.getName());
+            throw new IllegalArgumentException(errorMessage);
         }
     }
 
@@ -51,14 +55,12 @@ public class FileSystemBuilder {
         }
     }
 
-    private void addFile(String name, String extension)
-    {
+    private void addFile(String name, String extension) {
         File file = new File(name, extension);
         currentDirectory.addFileComponent(file);
     }
 
-    private void addFolder(String name)
-    {
+    private void addFolder(String name) {
         Folder folder = new Folder(name);
         this.currentDirectory.addFileComponent(folder);
         this.currentDirectory = folder;

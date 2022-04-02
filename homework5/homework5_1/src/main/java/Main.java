@@ -1,7 +1,8 @@
 import Console.ConsoleProvider;
 import Console.FilePresenter;
 import Console.SimpleMenu;
-import FileInfo.*;
+import FileSystem.FileSystemBuilder;
+import FileSystem.FileSystemTree;
 import Validators.FilePresenterValidator;
 import Validators.FileSystemBuilderValidator;
 
@@ -10,10 +11,11 @@ public class Main {
         FilePresenterValidator filePresenterValidator = new FilePresenterValidator();
         FileSystemBuilderValidator fileSystemBuilderValidator = new FileSystemBuilderValidator();
 
-        FileSystemBuilder builder = new FileSystemBuilder(fileSystemBuilderValidator, "root");
-        FilePresenter filePresenter = new FilePresenter(builder, filePresenterValidator);
-
         ConsoleProvider consoleProvider = new ConsoleProvider();
+
+        FileSystemBuilder builder = new FileSystemBuilder(fileSystemBuilderValidator, "root");
+        FileSystemTree fileSystemTree = new FileSystemTree();
+        FilePresenter filePresenter = new FilePresenter(builder, fileSystemTree, filePresenterValidator, consoleProvider);
 
         SimpleMenu simpleMenu = new SimpleMenu(filePresenter, consoleProvider);
         simpleMenu.runMenu();
