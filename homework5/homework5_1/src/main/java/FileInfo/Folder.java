@@ -25,23 +25,7 @@ public class Folder extends FileComponent
     }
 
     @Override
-    public void printSubFileComponents()
-    {
-        System.out.println("Printing subFileComponents of " + name + ":");
-        subFileComponents.forEach(component -> System.out.println("Sub-file name: \"" + component.name + "\""));
-    }
-
-    public void add(FileComponent newNode)
-    {
-        this.subFileComponents.add(newNode);
-    }
-
-    public void remove(FileComponent deleteNode)
-    {
-        this.subFileComponents.remove(deleteNode);
-    }
-
-    public FileComponent getChildFileByName(String name) {
+    public FileComponent getFileComponentByName(String name) {
         return subFileComponents.stream()
                 .filter(file -> Objects.equals(file.getName(), name))
                 .findFirst()

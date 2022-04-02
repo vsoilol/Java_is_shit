@@ -1,5 +1,7 @@
 package Console;
 
+import Resources.UIResources;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.HashMap;
@@ -45,18 +47,25 @@ public class ConsoleProvider {
     }
 
     public <T> T prompt(String message, Class<T> expectedClass) {
+        boolean isValid = false;
         Object input = null;
         T output = null;
         this.print(message);
 
-        try {
-            input = keyboardParseInputs.get(expectedClass).get();
+        while (!isValid) {
+            try {
+                input = keyboardParseInputs.get(expectedClass).get();
 
-            output = expectedClass.cast(input);
-        } catch (InputMismatchException ignored) {
-        } finally {
-            if (expectedClass != String.class) {
-                keyboard.nextLine();
+                output = expectedClass.cast(input);
+                isValid = output.toString().length() != 0;
+            } catch (InputMismatchException ignored) {
+            } finally {
+                if (expectedClass != String.class) {
+                    keyboard.nextLine();
+                }
+                if (!isValid) {
+                    this.print(UIResources.INPUT_ERROR_MESSAGE);
+                }
             }
         }
 

@@ -1,7 +1,5 @@
 package FileInfo;
 
-import java.util.Objects;
-
 public abstract class FileComponent
 {
     protected String name;
@@ -17,6 +15,5 @@ public abstract class FileComponent
     }
 
     public abstract void addFileComponent(FileComponent component);
-    public abstract void printSubFileComponents();
-    //public abstract boolean isDirectory();
+    public abstract FileComponent getFileComponentByName(String name);
 }

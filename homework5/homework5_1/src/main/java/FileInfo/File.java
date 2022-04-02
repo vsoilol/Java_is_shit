@@ -2,9 +2,17 @@ package FileInfo;
 
 public class File extends FileComponent
 {
-    public File(String name)
+    private final String extension;
+
+    public File(String name, String extension)
     {
         super(name);
+        this.extension = extension;
+    }
+
+    @Override
+    public String getName(){
+        return name + "." +  extension;
     }
 
     @Override
@@ -14,8 +22,7 @@ public class File extends FileComponent
     }
 
     @Override
-    public void printSubFileComponents()
-    {
-        throw new UnsupportedOperationException("Cannot print children of a normal file.");
+    public FileComponent getFileComponentByName(String name) {
+        throw new UnsupportedOperationException("File: Trying to get file from regular file.");
     }
 }

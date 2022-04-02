@@ -1,33 +1,34 @@
 package Console;
 
 import FileInfo.FileAssert;
-import FileInfo.FileService;
-import FileInfo.Folder;
+import FileInfo.FileSystemBuilder;
 import Resources.ErrorMessages;
+import Resources.RegularExpressions;
 import Resources.UIResources;
+import Validators.FilePresenterValidator;
 
 public class FilePresenter {
     private final ConsoleProvider consoleProvider;
-    private final FileService fileService;
-    private final FileValidation validation;
+    private final FileSystemBuilder builder;
+    private final FilePresenterValidator validator;
 
-    private final Folder rootFolder;
-
-    public FilePresenter(FileService fileService, FileValidation validation, Folder rootFolder) {
-        this.validation = validation;
-        this.rootFolder = rootFolder;
-        this.fileService = fileService;
+    public FilePresenter(FileSystemBuilder builder, FilePresenterValidator validator) {
+        this.validator = validator;
+        this.builder = builder;
         this.consoleProvider = ConsoleProvider.getInstance();
     }
 
     public void displayDirectoryTree() {
-        consoleProvider.print(FileAssert.printDirectoryTree(rootFolder));
+        consoleProvider.print(FileAssert.printDirectoryTree(builder.getRootFolder()));
     }
 
     public void addNewChild(String path) {
         try{
-            String[] filesName = validation.validatePath(rootFolder, path);
-            fileService.addFileTreeByPath(rootFolder, filesName);
+            validator.checkFilePath(path);
+
+            String[] filesName = path.split("/");
+            builder.addFileTreeByFilesName(filesName);
+
             consoleProvider.println(UIResources.SUCCESS);
         }
         catch (Exception ex){
