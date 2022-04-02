@@ -3,37 +3,48 @@ package FileInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-public class Folder extends File {
-    private final List<File> children;
+public class Folder extends FileComponent
+{
+    private ArrayList<FileComponent> subFileComponents = new ArrayList<>();
 
-    public Folder(String directoryName, List<File> children) {
-        super(directoryName);
-        this.children = new ArrayList<File>(children);
+    public Folder(String name)
+    {
+        super(name);
     }
 
-    public Folder(String directoryName) {
-        super(directoryName);
-        this.children = new ArrayList<File>();
-    }
-
-    public void addChild(File file) {
-        this.children.add(file);
-    }
-
-    public File getChildFileByName(String name) {
-        return children.stream()
-                .filter(file -> file.isNameEqual(name))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public List<File> getFiles() {
-        return children;
+    public ArrayList<FileComponent> getSubFileComponents() {
+        return subFileComponents;
     }
 
     @Override
-    public String getName() {
-        return name + "/";
+    public void addFileComponent(FileComponent component)
+    {
+        subFileComponents.add(component);
+    }
+
+    @Override
+    public void printSubFileComponents()
+    {
+        System.out.println("Printing subFileComponents of " + name + ":");
+        subFileComponents.forEach(component -> System.out.println("Sub-file name: \"" + component.name + "\""));
+    }
+
+    public void add(FileComponent newNode)
+    {
+        this.subFileComponents.add(newNode);
+    }
+
+    public void remove(FileComponent deleteNode)
+    {
+        this.subFileComponents.remove(deleteNode);
+    }
+
+    public FileComponent getChildFileByName(String name) {
+        return subFileComponents.stream()
+                .filter(file -> Objects.equals(file.getName(), name))
+                .findFirst()
+                .orElse(null);
     }
 }

@@ -1,17 +1,21 @@
 package FileInfo;
 
-import java.util.Objects;
-
-public abstract class File {
-    protected final String name;
-
-    protected File(String name) {
-        this.name = name;
+public class File extends FileComponent
+{
+    public File(String name)
+    {
+        super(name);
     }
 
-    public boolean isNameEqual(String name) {
-        return Objects.equals(this.name, name);
+    @Override
+    public void addFileComponent(FileComponent component)
+    {
+        throw new UnsupportedOperationException("File: Trying to add new file to regular file.");
     }
 
-    public abstract String getName();
+    @Override
+    public void printSubFileComponents()
+    {
+        throw new UnsupportedOperationException("Cannot print children of a normal file.");
+    }
 }

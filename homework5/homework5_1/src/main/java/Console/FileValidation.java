@@ -4,6 +4,8 @@ import FileInfo.Folder;
 import Resources.ErrorMessages;
 import Resources.RegularExpressions;
 
+import java.util.Objects;
+
 public class FileValidation {
     public String[] validatePath(Folder parent, String path){
         if(path.matches(RegularExpressions.FILE_PATH)){
@@ -12,7 +14,7 @@ public class FileValidation {
 
         String[] filesName = path.split("/");
 
-        if(parent.isNameEqual(filesName[0])){
+        if(Objects.equals(parent.getName(), filesName[0])){
             throw new IllegalArgumentException(ErrorMessages.FOLDER_DOES_NOT_EXIST.formatted(filesName[0]));
         }
 
