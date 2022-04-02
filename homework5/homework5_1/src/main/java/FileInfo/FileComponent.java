@@ -10,8 +10,4 @@ public abstract class FileComponent {
     public String getName() {
         return name;
     }
-
-    public abstract void addFileComponent(FileComponent component);
-
-    public abstract FileComponent getFileComponentByName(String name);
 }

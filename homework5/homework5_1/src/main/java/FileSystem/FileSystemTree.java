@@ -32,7 +32,7 @@ public class FileSystemTree {
         sb.append("/");
         sb.append("\n");
 
-        for (FileComponent file : ((Folder) folder).getSubFileComponents()) {
+        for (FileComponent file : ((Folder)folder).getSubFileComponents()) {
             if (file instanceof Folder) {
                 printDirectoryTree(file, indent + 1, sb);
             } else {
