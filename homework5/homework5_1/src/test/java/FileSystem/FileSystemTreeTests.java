@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FileSystemTreeTests {
-    private FileComponent folder1;
+    private Folder folder1;
     private final FileSystemTree fileSystemTree = new FileSystemTree();
 
     @BeforeEach
@@ -59,26 +59,26 @@ public class FileSystemTreeTests {
     }
 
     private void addSeveralFoldersWithFiles() {
-        FileComponent aFile = new File("a", "txt");
+        File aFile = new File("a", "txt");
         folder1.addFileComponent(aFile);
 
-        FileComponent folder2 = new Folder("folder2");
+        Folder folder2 = new Folder("folder2");
 
-        FileComponent b1File = new File("b1", "txt");
-        FileComponent b2File = new File("b2", "txt");
+        File b1File = new File("b1", "txt");
+        File b2File = new File("b2", "txt");
 
         folder2.addFileComponent(b1File);
         folder2.addFileComponent(b2File);
 
         folder1.addFileComponent(folder2);
 
-        FileComponent b3File = new File("b3", "txt");
+        File b3File = new File("b3", "txt");
         folder2.addFileComponent(b3File);
 
-        FileComponent folder3 = new Folder("folder3");
+        Folder folder3 = new Folder("folder3");
         folder2.addFileComponent(folder3);
 
-        FileComponent folder4 = new Folder("folder4");
+        Folder folder4 = new Folder("folder4");
         folder1.addFileComponent(folder4);
     }
 }

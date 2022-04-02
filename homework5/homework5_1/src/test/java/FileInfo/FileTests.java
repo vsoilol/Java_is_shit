@@ -3,10 +3,7 @@ package FileInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FileTests {
     private File file;
@@ -26,16 +23,5 @@ public class FileTests {
         String actual = file.getName();
 
         assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testAddFileComponentShouldThrowUnsupportedOperationException() {
-        FileComponent folder = new Folder("newFolder");
-        assertThrows(UnsupportedOperationException.class, () -> file.addFileComponent(folder));
-    }
-
-    @Test
-    public void testGetFileComponentByNameShouldThrowUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> file.getFileComponentByName("newFolder"));
     }
 }
