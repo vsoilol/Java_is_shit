@@ -6,7 +6,7 @@ import Validators.FilePresenterValidator;
 import Validators.FileSystemBuilderValidator;
 
 public class SimpleMenuFacade {
-    public void runMenu(){
+    public void runMenu() {
         FilePresenterValidator filePresenterValidator = new FilePresenterValidator();
         FileSystemBuilderValidator fileSystemBuilderValidator = new FileSystemBuilderValidator();
 

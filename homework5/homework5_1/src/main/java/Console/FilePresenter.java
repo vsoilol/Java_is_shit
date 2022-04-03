@@ -3,7 +3,7 @@ package Console;
 import FileSystem.FileSystemTree;
 import FileSystem.FileSystemBuilder;
 import Resources.UIResources;
-import Validators.FilePresenterValidator;
+import Validators.Validator;
 
 public class FilePresenter {
     private final ConsoleProvider consoleProvider;
@@ -11,11 +11,11 @@ public class FilePresenter {
     private final FileSystemBuilder builder;
     private final FileSystemTree fileSystemTree;
 
-    private final FilePresenterValidator validator;
+    private final Validator<String> validator;
 
     public FilePresenter(FileSystemBuilder builder,
                          FileSystemTree fileSystemTree,
-                         FilePresenterValidator validator,
+                         Validator<String> validator,
                          ConsoleProvider consoleProvider) {
         this.fileSystemTree = fileSystemTree;
         this.validator = validator;
@@ -29,7 +29,7 @@ public class FilePresenter {
 
     public void addNewChild(String path) {
         try {
-            validator.checkFilePath(path);
+            validator.check(path);
 
             String[] filesName = path.split("/");
             builder.addFileTreeByFilesName(filesName);

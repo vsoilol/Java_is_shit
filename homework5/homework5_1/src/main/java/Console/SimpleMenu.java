@@ -10,7 +10,6 @@ public class SimpleMenu {
     private boolean isMenuRun = true;
 
     public SimpleMenu(FilePresenter filePresenter, ConsoleProvider consoleProvider) {
-
         this.filePresenter = filePresenter;
         this.consoleProvider = consoleProvider;
     }
