@@ -4,17 +4,26 @@ import FileInfo.File;
 import FileInfo.FileComponent;
 import FileInfo.Folder;
 import Resources.ErrorMessages;
-import Validators.FileSystemBuilderValidator;
+import ValidationModels.FilesNameValidationInfo;
+import Validators.Validator;
+import com.google.common.annotations.VisibleForTesting;
 
 public class FileSystemBuilder {
-    private final FileSystemBuilderValidator validator;
+    private final Validator<FilesNameValidationInfo> validator;
 
     private final Folder root;
     private Folder currentDirectory;
 
-    public FileSystemBuilder(FileSystemBuilderValidator validator, String rootFolder) {
+    public FileSystemBuilder(Validator<FilesNameValidationInfo> validator, String rootFolder) {
         this.validator = validator;
         this.root = new Folder(rootFolder);
+        this.currentDirectory = root;
+    }
+
+    @VisibleForTesting
+    FileSystemBuilder(Validator<FilesNameValidationInfo> validator, Folder rootFolder) {
+        this.validator = validator;
+        this.root = rootFolder;
         this.currentDirectory = root;
     }
 
@@ -23,7 +32,7 @@ public class FileSystemBuilder {
     }
 
     public void addFileTreeByFilesName(String[] filesName) {
-        validator.checkFilesName(filesName, root.getName());
+        validator.check(new FilesNameValidationInfo(filesName, root.getName()));
         currentDirectory = root;
 
         for (int i = 1; i < filesName.length; i++) {
