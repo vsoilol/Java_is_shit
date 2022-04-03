@@ -13,12 +13,12 @@ public class FilePresenterValidatorTests {
     @ParameterizedTest
     @ArgumentsSource(CorrectPathProvider.class)
     public void testCheckFilePathShouldNotThrowIllegalArgumentException(String path) {
-        assertDoesNotThrow(() -> validator.checkFilePath(path));
+        assertDoesNotThrow(() -> validator.check(path));
     }
 
     @ParameterizedTest
     @ArgumentsSource(IncorrectPathProvider.class)
     public void testCheckFilePathShouldThrowIllegalArgumentException(String path) {
-        assertThrows(IllegalArgumentException.class, () -> validator.checkFilePath(path));
+        assertThrows(IllegalArgumentException.class, () -> validator.check(path));
     }
 }

@@ -1,5 +1,6 @@
 package Validators;
 
+import ValidationModels.FilesNameValidationInfo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -13,21 +14,24 @@ public class FileSystemBuilderValidatorTests {
     @Test
     public void testCheckFilesNameWhenRootNameIsNotEqual() {
         String[] filesName = new String[]{"roo", "sdf", "dfsd"};
+        FilesNameValidationInfo info = new FilesNameValidationInfo(filesName, rootFolderName);
 
-        assertThrows(IllegalArgumentException.class, () -> validator.checkFilesName(filesName, rootFolderName));
+        assertThrows(IllegalArgumentException.class, () -> validator.check(info));
     }
 
     @Test
     public void testCheckFilesNameWhenFilesNameLengthEqualOne() {
         String[] filesName = new String[]{"root"};
+        FilesNameValidationInfo info = new FilesNameValidationInfo(filesName, rootFolderName);
 
-        assertThrows(IllegalArgumentException.class, () -> validator.checkFilesName(filesName, rootFolderName));
+        assertThrows(IllegalArgumentException.class, () -> validator.check(info));
     }
 
     @Test
     public void testCheckFilesNameShouldNotThrowException() {
         String[] filesName = new String[]{"root", "sfsd", "dsdf"};
+        FilesNameValidationInfo info = new FilesNameValidationInfo(filesName, rootFolderName);
 
-        assertDoesNotThrow(() -> validator.checkFilesName(filesName, rootFolderName));
+        assertDoesNotThrow(() -> validator.check(info));
     }
 }
