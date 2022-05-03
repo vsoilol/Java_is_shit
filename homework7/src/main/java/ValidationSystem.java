@@ -1,4 +1,3 @@
-import Exceptions.ValidationFailedException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,9 +8,11 @@ public final class ValidationSystem {
         put(String.class, new StringValidator());
     }};
 
-    public static <T> void validate(T value) throws ValidationFailedException {
-        if (!validators.get(value.getClass()).isValid(value)) {
-            throw new ValidationFailedException(value.getClass() + " value " + value + " is invalid");
+    public static <T> boolean validate(T value) {
+        if(!validators.containsKey(value.getClass())){
+            return false;
         }
+
+        return validators.get(value.getClass()).isValid(value);
     }
 }

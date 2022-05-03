@@ -1,38 +1,39 @@
-import Exceptions.ValidationFailedException;
-import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ValidationSystemTests {
-    @Test
-    public void testValidateInt() throws ValidationFailedException {
-        ValidationSystem.validate(1);
-        ValidationSystem.validate(5);
-        ValidationSystem.validate(10);
+    @ParameterizedTest
+    @ValueSource(ints = {1, 5, 10})
+    public void testValidateInt(int value)  {
+        boolean expected = ValidationSystem.validate(value);
+
+        assertTrue(expected);
     }
 
-    @Test(expected = ValidationFailedException.class)
-    public void testValidateIntFails() throws ValidationFailedException {
-        ValidationSystem.validate(11);
+    @ParameterizedTest
+    @ValueSource(ints = {11, 0})
+    public void testValidateIntFails(int value) {
+        boolean expected = ValidationSystem.validate(value);
+
+        assertFalse(expected);
     }
 
-    @Test(expected = ValidationFailedException.class)
-    public void testValidateIntFails2() throws ValidationFailedException {
-        ValidationSystem.validate(0);
+    @ParameterizedTest
+    @ValueSource(strings = {"Hello", "Hello world, abc"})
+    public void testValidateString(String value)  {
+        boolean expected = ValidationSystem.validate(value);
+
+        assertTrue(expected);
     }
 
-    @Test
-    public void testValidateString() throws ValidationFailedException {
-        ValidationSystem.validate("Hello");
-        ValidationSystem.validate("Hello world, abc");
-    }
+    @ParameterizedTest
+    @ValueSource(strings = {"hello", ""})
+    public void testValidateStringFails(String value) {
+        boolean expected = ValidationSystem.validate(value);
 
-    @Test(expected = ValidationFailedException.class)
-    public void testValidateStringFails() throws ValidationFailedException {
-        ValidationSystem.validate("hello");
+        assertFalse(expected);
     }
-
-    @Test(expected = ValidationFailedException.class)
-    public void testValidateStringFails2() throws ValidationFailedException {
-        ValidationSystem.validate("");
-    }
-
 }
