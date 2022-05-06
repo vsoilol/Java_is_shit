@@ -1,9 +1,10 @@
-import Providers.IncorrectValues;
-import Providers.InvalidValues;
-import Providers.ValuesWithIncorrectLength;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -11,35 +12,35 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class SimpleMenuTest {
     private final String[] VALID_VALUES = new String[]{"1", "2", "7"};
 
+    private SimpleMenu simpleMenu;
+
+    @BeforeEach
+    public void init() {
+        simpleMenu = new SimpleMenu();
+    }
+
     @Test
     public void testInvokeOperationShouldWorkAsExpected() {
-        SimpleMenu menu = new SimpleMenu(VALID_VALUES);
-
-        String expected = menu.invokeOperation();
+        String expected = simpleMenu.invokeOperation(VALID_VALUES);
 
         assertNotEquals(0, expected.length());
     }
 
     @ParameterizedTest
-    @ArgumentsSource(InvalidValues.class)
-    public void testConstructorShouldThrowIllegalArgumentExceptionWhenValuesInvalid(String[] values) {
-        assertThrows(IllegalArgumentException.class, () -> new SimpleMenu(values));
-    }
-
-    @ParameterizedTest
-    @ArgumentsSource(ValuesWithIncorrectLength.class)
-    public void testConstructorShouldThrowIllegalArgumentExceptionWhenLengthNotEqualThree(String[] values) {
-        assertThrows(IllegalArgumentException.class, () -> new SimpleMenu(values));
-    }
-
-    @ParameterizedTest
-    @ArgumentsSource(IncorrectValues.class)
-    public void testConstructorShouldThrowNumberFormatException(String[] values) {
-        assertThrows(NumberFormatException.class, () -> new SimpleMenu(values));
+    @MethodSource("incorrectValuesProvider")
+    public void testInvokeOperationShouldThrowNumberFormatException(String[] values) {
+        assertThrows(NumberFormatException.class, () -> simpleMenu.invokeOperation(values));
     }
 
     @Test
-    public void testConstructorShouldNotThrowIllegalArgumentOrNumberFormatException() {
-        assertDoesNotThrow(() -> new SimpleMenu(VALID_VALUES));
+    public void testInvokeOperationShouldNotThrowIllegalArgumentOrNumberFormatException() {
+        assertDoesNotThrow(() -> simpleMenu.invokeOperation(VALID_VALUES));
+    }
+
+    static Stream<Arguments> incorrectValuesProvider() {
+        return Stream.of(
+                (Object) new String[]{"2", "k", "3"},
+                (Object) new String[]{"2", "1.1", "3"},
+                (Object) new String[]{"a", "2", "4"}).map(Arguments::of);
     }
 }
