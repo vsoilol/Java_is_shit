@@ -15,28 +15,18 @@ public class LetterInfoTests {
 
     @BeforeEach
     public void init() {
-        letterInfo = new LetterInfo(word);
+        letterInfo = new LetterInfo(word, 1);
     }
 
     @Test
     public void testPutWordShouldPutNewWord() {
         String newWord = "boy";
 
-        letterInfo.putWord(newWord);
+        letterInfo.putWord(newWord, 1);
         Map<String, Integer> words = letterInfo.getWords();
 
         assertEquals(2, words.size());
         assertTrue(words.containsKey(newWord));
-    }
-
-    @Test
-    public void testPutWordShouldIncreaseWordAmount() {
-        letterInfo.putWord(word);
-        Map<String, Integer> words = letterInfo.getWords();
-        Integer amount = words.get(word);
-
-        assertEquals(1, words.size());
-        assertEquals(2, amount);
     }
 
     @Test
@@ -56,11 +46,11 @@ public class LetterInfoTests {
 
     @Test
     void testCompareToShouldWorkAsExpected() {
-        LetterInfo letterB = new LetterInfo("bojds");
+        LetterInfo letterB = new LetterInfo("bojds", 1);
 
         assertEquals(-1, letterInfo.compareTo(letterB));
 
-        LetterInfo letterA = new LetterInfo("addfsd");
+        LetterInfo letterA = new LetterInfo("addfsd", 1);
 
         assertEquals(0, letterInfo.compareTo(letterA));
 
