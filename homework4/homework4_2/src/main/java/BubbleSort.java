@@ -1,5 +1,4 @@
-public class BubbleSort extends Sorter {
-    @Override
+public class BubbleSort implements Sorter {
     public void sort(Integer[] array) {
         int n = array.length;
 
@@ -12,5 +11,9 @@ public class BubbleSort extends Sorter {
         }
     }
 
-
+    private void swapElements(Integer[] array, int firstIndex, int secondIndex) {
+        int temp = array[firstIndex];
+        array[firstIndex] = array[secondIndex];
+        array[secondIndex] = temp;
+    }
 }

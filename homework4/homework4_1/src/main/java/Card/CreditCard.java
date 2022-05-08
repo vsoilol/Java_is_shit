@@ -2,12 +2,12 @@ package Card;
 
 import java.math.BigDecimal;
 
-public class CreditCard extends Card{
+public class CreditCard extends Card {
     public CreditCard(String holderName, BigDecimal balance) {
         super(holderName, balance);
     }
 
-    public CreditCard(String holderName){
+    public CreditCard(String holderName) {
         super(holderName);
     }
 

@@ -1,5 +1,4 @@
-public class SelectionSort extends Sorter {
-    @Override
+public class SelectionSort implements Sorter {
     public void sort(Integer[] array) {
         int n = array.length;
 
@@ -13,5 +12,11 @@ public class SelectionSort extends Sorter {
 
             swapElements(array, minIndex, i);
         }
+    }
+
+    private void swapElements(Integer[] array, int firstIndex, int secondIndex) {
+        int temp = array[firstIndex];
+        array[firstIndex] = array[secondIndex];
+        array[secondIndex] = temp;
     }
 }

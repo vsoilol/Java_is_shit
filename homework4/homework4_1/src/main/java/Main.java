@@ -4,10 +4,10 @@ import Card.DebitCard;
 
 public class Main {
     public static void main(String[] args) {
-        Card creditCard = new CreditCard("Vlad Credit");
-        Card debitCard = new DebitCard("Vlad Debit");
+        Card creditCard = new CreditCard("User Credit");
+        Card debitCard = new DebitCard("User Debit");
 
         ATM atm = new ATM();
-        atm.run(creditCard);
+        atm.run(debitCard);
     }
 }
