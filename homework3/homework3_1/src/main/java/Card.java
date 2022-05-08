@@ -1,11 +1,7 @@
-package Card;
-
-import Resources.ErrorMessages;
-
 import java.math.BigDecimal;
 
 public class Card {
-    private String holderName;
+    private final String holderName;
     private BigDecimal balance;
 
     public Card(String holderName, BigDecimal balance) {
@@ -32,12 +28,12 @@ public class Card {
 
     public void withdrawMoneyFrom(BigDecimal money) throws NumberFormatException {
         if (money.compareTo(balance) == 1) {
-            throw new NumberFormatException(ErrorMessages.CANNOT_WITHDRAW_MONEY);
+            throw new NumberFormatException("Cannot withdraw such an amount from the balance");
         }
         balance = balance.subtract(money);
     }
 
-    public BigDecimal convertMoneyByExchangeRate(double exchangeRate) throws NumberFormatException {
+    public BigDecimal convertMoneyByExchangeRate(double exchangeRate) {
         return balance.multiply(BigDecimal.valueOf(exchangeRate));
     }
 }
