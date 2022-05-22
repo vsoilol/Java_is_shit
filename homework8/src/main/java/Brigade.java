@@ -11,7 +11,7 @@ public class Brigade {
     }
 
     public List<Employee> getEmployees() {
-        return employees;
+        return new ArrayList<>(employees);
     }
 
     public Map<JobSkill, Long> getEmployeesInfo() {
