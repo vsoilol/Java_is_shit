@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Brigade {
     private final List<Employee> employees;
@@ -12,12 +11,6 @@ public class Brigade {
 
     public List<Employee> getEmployees() {
         return new ArrayList<>(employees);
-    }
-
-    public Map<JobSkill, Long> getEmployeesInfo() {
-        return employees.stream()
-                .flatMap(product -> product.getSkills().stream())
-                .collect(Collectors.groupingBy(group -> group, Collectors.counting()));
     }
 
     public Integer getFinancialProposal() {
