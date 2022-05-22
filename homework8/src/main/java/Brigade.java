@@ -15,11 +15,9 @@ public class Brigade {
     }
 
     public Map<JobSkill, Long> getEmployeesInfo() {
-        Map<JobSkill, Long> result = employees.stream()
+        return employees.stream()
                 .flatMap(product -> product.getSkills().stream())
                 .collect(Collectors.groupingBy(group -> group, Collectors.counting()));
-
-        return result;
     }
 
     public Integer getFinancialProposal() {

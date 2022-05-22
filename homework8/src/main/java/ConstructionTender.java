@@ -1,6 +1,5 @@
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ConstructionTender {
@@ -13,19 +12,17 @@ public class ConstructionTender {
     }
 
     public Brigade findCheapBrigadeByEmployeeRequirements(List<Brigade> brigades) {
-        Stream<Brigade> selectedBrigades = brigades
+        Stream<Brigade> suitableBrigades = brigades
                 .stream()
                 .filter(brigade -> brigade.getEmployeesInfo()
                         .equals(employeeRequirements));
 
-        if(selectedBrigades.count() == 0){
+        if(suitableBrigades.findAny().isEmpty()){
             return null;
         }
 
-        Brigade cheapBrigade = selectedBrigades
+        return suitableBrigades
                 .reduce((prev, curr) -> prev.getFinancialProposal() < curr.getFinancialProposal() ? prev : curr)
                 .get();
-
-        return cheapBrigade;
     }
 }
