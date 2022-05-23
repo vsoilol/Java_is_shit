@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class IntegerArrayComparator implements Comparator<Integer> {
+public class IntegerSumDigitsComparator implements Comparator<Integer> {
     @Override
     public int compare(Integer number1, Integer number2) {
         return sumOfDigits(number1).compareTo(sumOfDigits(number2));
